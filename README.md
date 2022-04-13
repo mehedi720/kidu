@@ -1,7 +1,7 @@
 # kidu
 
-A interactive learing app for kids
+An interactive learing app for kids
 
 ## Contribution
 
-This project is a part of Chittagon Polytechnic Instituteguigit
+This project is a part of Chittagon Polytechnic Institute
