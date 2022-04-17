@@ -120,6 +120,7 @@ class _DashBoardState extends State<DashBoard> {
                   MainGridItem(
                       OnTap: () {
                         //TODO: had to add some thing
+                        Navigator.pushNamed(context, "PoemSelectionPage");
                       },
                       BackgroundColor: PURPLE_2,
                       ContentColor: PURPLE_PR,

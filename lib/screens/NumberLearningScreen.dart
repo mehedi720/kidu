@@ -4,6 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:kidu/utility/constants.dart';
 
 AudioCache audio = AudioCache();
+Map AllNumbers = {
+  1: "One",
+  2: "Two",
+  3: "Three",
+  4: "Four",
+  5: "Five",
+  6: "Six",
+  7: "Seven",
+  8: "Eight",
+  9: "Nine",
+  10: "Ten",
+  11: "Eleven",
+  12: "Twelve"
+};
 
 class NumberLearningScreen extends StatefulWidget {
   const NumberLearningScreen({Key? key}) : super(key: key);
@@ -51,10 +65,11 @@ class _NumberLearningScreenState extends State<NumberLearningScreen> {
           Container(
             height: 600,
             child: GridView.builder(
+              primary: true,
               itemCount: 12,
               padding: EdgeInsets.all(20),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
+                  crossAxisCount: 1,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   mainAxisExtent: 100),
@@ -104,12 +119,30 @@ class _NumberGridItemState extends State<NumberGridItem> {
           color: widget.backgroundColor ?? PURPLE_2,
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Text(
-          "${widget.index + 1}",
-          style: TextStyle(
-            fontSize: 50,
-            color: widget.foregroundColor ?? PURPLE_PR,
-            fontWeight: FontWeight.w900,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            children: [
+              Text(
+                "${widget.index + 1}",
+                style: TextStyle(
+                  fontSize: 40,
+                  color: widget.foregroundColor ?? PURPLE_PR,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              Text(
+                "${AllNumbers[widget.index + 1]}",
+                style: TextStyle(
+                  fontSize: 40,
+                  color: widget.foregroundColor ?? PURPLE_PR,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
           ),
         ),
       ),

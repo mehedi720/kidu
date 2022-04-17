@@ -5,6 +5,8 @@ import 'package:kidu/screens/NumberGameScreen.dart';
 import 'package:kidu/screens/NumberLearningScreen.dart';
 import 'package:kidu/screens/Personalize.dart';
 import 'package:kidu/screens/PersonalizeBn.dart';
+import 'package:kidu/screens/PoemSelectionPage.dart';
+import 'package:kidu/screens/SinglePoemPage.dart';
 import 'package:kidu/screens/flash_screen.dart';
 
 void main() {
@@ -19,7 +21,7 @@ class KiduApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Kidu",
-      initialRoute: "NumberGameScreen",
+      initialRoute: "PoemSelectionPage",
       routes: {
         "SplashScreen": (context) => FlashScreen(),
         "LanguageSlection": (context) => LanguageSlection(),
@@ -28,6 +30,8 @@ class KiduApp extends StatelessWidget {
         "DashBoard": (context) => DashBoard(),
         "NumberLearningScreen": (context) => NumberLearningScreen(),
         "NumberGameScreen": (context) => NumberGameScreen(),
+        "PoemSelectionPage": (context) => PoemSelectionPage(),
+        "SinglePoemPage": (context) => SinglePoemPage(),
       },
     );
   }
