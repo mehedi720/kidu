@@ -62,10 +62,13 @@ flutter:
   assets:
     - assets/
     - assets/alphabet/eng/
+    - assets/alphabet/bn/benjonborno/
+    - assets/alphabet/bn/soroborno/
     - assets/img/
     - assets/poem/
     - assets/mp3/
     - assets/mp3/poems/
+    - assets/mp3/poems/bn/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

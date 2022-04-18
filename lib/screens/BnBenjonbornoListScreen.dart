@@ -1,13 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kidu/screens/BnBenjonbornoItemScreen.dart';
+import 'package:kidu/utility/banglaBornomal.dart';
+import 'package:kidu/utility/constants.dart';
 
-import '../utility/constants.dart';
-import '../utility/engAlphabetList.dart';
-import 'EnglishAlphabetItem.dart';
+class BnBenjonbornoListScreen extends StatefulWidget {
+  const BnBenjonbornoListScreen({Key? key}) : super(key: key);
 
-class EngAlphabetListScreen extends StatelessWidget {
-  const EngAlphabetListScreen({Key? key}) : super(key: key);
+  @override
+  State<BnBenjonbornoListScreen> createState() =>
+      _BnBenjonbornoListScreenState();
+}
 
+class _BnBenjonbornoListScreenState extends State<BnBenjonbornoListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +42,7 @@ class EngAlphabetListScreen extends StatelessWidget {
                 ),
               );
             },
-            itemCount: EngAlphabetBig.length,
+            itemCount: BanglaAlphabetConsonants.length,
             itemExtent: 100,
           )
 
@@ -68,8 +72,7 @@ class GridItem extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  EnglishAlphabetItemScreen(itemNumber: index),
+              builder: (context) => BnBenjonbornoItemScreen(itemNumber: index),
             ));
       },
       child: Container(
@@ -86,7 +89,7 @@ class GridItem extends StatelessWidget {
                   BoxDecoration(shape: BoxShape.circle, color: ORANGE_2),
               child: Center(
                 child: Text(
-                  "${EngAlphabetBig[index]}",
+                  "${BanglaAlphabetConsonants[index]}",
                   style: TextStyle(
                     fontSize: 42,
                     fontWeight: FontWeight.w900,
@@ -96,7 +99,7 @@ class GridItem extends StatelessWidget {
               ),
             ),
             Container(
-              child: Text("${EngWords[index]}",
+              child: Text("${BanglaAlphabetConsonantsWords[index]}",
                   style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w900,
@@ -110,7 +113,8 @@ class GridItem extends StatelessWidget {
                 color: Colors.grey.shade200,
                 //border: Border.all(width: 1, color: PURPLE_PR),
                 image: DecorationImage(
-                  image: AssetImage("assets/alphabet/eng/${index}.png"),
+                  image:
+                      AssetImage("assets/alphabet/bn/benjonborno/${index}.png"),
                   fit: BoxFit.scaleDown,
                 ),
               ),
@@ -121,13 +125,3 @@ class GridItem extends StatelessWidget {
     );
   }
 }
-//
-// Center(
-// child: Text(
-// "${EngAlphabetBig[index]}",
-// style: TextStyle(
-// fontSize: 42,
-// fontWeight: FontWeight.w900,
-// ),
-// ),
-// )

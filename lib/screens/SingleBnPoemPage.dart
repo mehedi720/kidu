@@ -1,21 +1,17 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:kidu/utility/PoemList.dart';
+import 'package:kidu/utility/constants.dart';
 
-import '../utility/constants.dart';
-
-AudioCache player = AudioCache();
-
-class SinglePoemPage extends StatefulWidget {
-  var poemId;
-
-  SinglePoemPage({Key? key, this.poemId}) : super(key: key);
+class SingleBnPoemPage extends StatefulWidget {
+  int poemId;
+  SingleBnPoemPage({Key? key, required this.poemId}) : super(key: key);
 
   @override
-  State<SinglePoemPage> createState() => _SinglePoemPageState();
+  State<SingleBnPoemPage> createState() => _SingleBnPoemPageState();
 }
 
-class _SinglePoemPageState extends State<SinglePoemPage> {
+class _SingleBnPoemPageState extends State<SingleBnPoemPage> {
   IconData playIcon = Icons.play_arrow;
   bool pause = false;
   bool isPlaying = false;
@@ -66,7 +62,7 @@ class _SinglePoemPageState extends State<SinglePoemPage> {
                   child: Hero(
                     tag: widget.poemId,
                     child: Image.asset(
-                      "assets/poem/poem_${widget.poemId}.png",
+                      "assets/poem/bn_poem_${widget.poemId}.png",
                       height: MediaQuery.of(context).size.height,
                       fit: BoxFit.fill,
                     ),
@@ -93,7 +89,7 @@ class _SinglePoemPageState extends State<SinglePoemPage> {
                         Flexible(
                           flex: 6,
                           child: Text(
-                            "${PoemList[widget.poemId]}",
+                            "${BanglaPoemList[widget.poemId]}",
                             style: TextStyle(color: Colors.white, fontSize: 28),
                           ),
                         ),
@@ -111,20 +107,29 @@ class _SinglePoemPageState extends State<SinglePoemPage> {
                     //alignment: Alignment(45, -16),
                     child: GestureDetector(
                       onTap: () {
+                        if (pause) {
+                          setState(() {
+                            playIcon = Icons.pause;
+                          });
+                        } else {
+                          setState(() {
+                            playIcon = Icons.play_arrow;
+                          });
+                        }
+                        ;
+
                         if (!isPlaying) {
                           setState(() async {
-                            await localPlayer?.play(
-                                "mp3/poems/eng_poem_${widget.poemId}.mp3");
+                            await localPlayer
+                                ?.play("mp3/poems/bn/${widget.poemId}.mp3");
                             pause = false;
                             isPlaying = true;
-                            playIcon = Icons.pause;
                           });
                         } else {
                           setState(() {
                             adPlayer?.pause();
                             pause = true;
                             isPlaying = false;
-                            playIcon = Icons.play_arrow;
                           });
                         }
                       },
@@ -148,11 +153,11 @@ class _SinglePoemPageState extends State<SinglePoemPage> {
               //alignment: Alignment(0, -8),
               child: ListView.builder(
                   padding: const EdgeInsets.only(bottom: 100.0),
-                  itemCount: Lyrics().getLyricsLength(widget.poemId),
+                  itemCount: BanglaLyrics().getLyricsLength(widget.poemId),
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(
-                        "${LyricsList[widget.poemId][index]}",
+                        "${BanglaLyricsList[widget.poemId][index]}",
                         style: TextStyle(
                             color: Colors.grey.shade700, fontSize: 22),
                       ),

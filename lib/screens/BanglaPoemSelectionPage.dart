@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kidu/screens/SinglePoemPage.dart';
+import 'package:kidu/screens/SingleBnPoemPage.dart';
 
 import '../utility/PoemList.dart';
 import '../utility/constants.dart';
@@ -60,7 +60,7 @@ class PoemItem extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => SinglePoemPage(
+                builder: (context) => SingleBnPoemPage(
                       poemId: index,
                     )));
       },
@@ -70,7 +70,7 @@ class PoemItem extends StatelessWidget {
             Hero(
               tag: index,
               child: Image.asset(
-                "assets/poem/poem_${index}.png",
+                "assets/poem/bn_poem_${index}.png",
                 fit: BoxFit.cover,
                 height: MediaQuery.of(context).size.height,
               ),
