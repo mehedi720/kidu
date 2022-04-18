@@ -102,6 +102,7 @@ class _DashBoardState extends State<DashBoard> {
                   MainGridItem(
                       OnTap: () {
                         //TODO: had to add some thing
+                        Navigator.pushNamed(context, "EngAlphabetListScreen");
                       },
                       BackgroundColor: ORANGE_2,
                       ContentColor: ORANGE_PR,

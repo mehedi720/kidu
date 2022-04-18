@@ -16,6 +16,8 @@ class SinglePoemPage extends StatefulWidget {
 }
 
 class _SinglePoemPageState extends State<SinglePoemPage> {
+  bool pauseButton = false;
+  bool isPlaying = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,39 +84,30 @@ class _SinglePoemPageState extends State<SinglePoemPage> {
                     ),
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 35.0),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    height: 400,
-                    alignment: Alignment(0, -8),
-                    child: ListView.builder(
-                        padding: const EdgeInsets.only(bottom: 100.0),
-                        itemCount: Lyrics().getLyricsLength(widget.poemId),
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(
-                              "${LyricsList[widget.poemId][index]}",
-                              style: TextStyle(
-                                  color: Colors.grey.shade700, fontSize: 22),
-                            ),
-                            minVerticalPadding: 20,
-                            style: ListTileStyle.list,
-                          );
-                        }),
-                  ),
-                  Container(
+                Positioned(
+                  bottom: 10,
+                  right: 20,
+                  child: Container(
                     width: 80,
                     height: 80,
-                    alignment: Alignment(45, -16),
+                    //alignment: Alignment(45, -16),
                     child: GestureDetector(
                       onTap: () {
-                        player.play("mp3/poems/eng_poem_${widget.poemId}.mp3");
-                        print("assets/mp3/poems/eng_poem${widget.poemId}.mp3");
+                        if (!isPlaying) {
+                          pauseButton = false;
+
+                          setState(() async {
+                            await player.play(
+                                "mp3/poems/eng_poem_${widget.poemId}.mp3");
+
+                            isPlaying = true;
+                          });
+                        } else {
+                          setState(() {
+                            pauseButton = true;
+                            isPlaying = false;
+                          });
+                        }
                       },
                       child: Container(
                           width: 70,
@@ -122,14 +115,32 @@ class _SinglePoemPageState extends State<SinglePoemPage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle, color: ORANGE_PR),
                           child: Icon(
-                            Icons.play_arrow,
+                            pauseButton ? Icons.pause : Icons.play_arrow,
                             color: Colors.white,
-                            size: 40,
+                            size: 50,
                           )),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
+            Container(
+              height: 400,
+              //alignment: Alignment(0, -8),
+              child: ListView.builder(
+                  padding: const EdgeInsets.only(bottom: 100.0),
+                  itemCount: Lyrics().getLyricsLength(widget.poemId),
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        "${LyricsList[widget.poemId][index]}",
+                        style: TextStyle(
+                            color: Colors.grey.shade700, fontSize: 22),
+                      ),
+                      minVerticalPadding: 20,
+                      style: ListTileStyle.list,
+                    );
+                  }),
             ),
           ],
         ),
