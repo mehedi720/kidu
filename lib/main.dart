@@ -14,6 +14,7 @@ import 'package:kidu/screens/PersonalizeBn.dart';
 import 'package:kidu/screens/PoemSelectionPage.dart';
 import 'package:kidu/screens/SinglePoemPage.dart';
 import 'package:kidu/screens/flash_screen.dart';
+import 'package:kidu/screens/wordGame.dart';
 // EnglishAlphabetItemScreen
 // BnSorobornoItemScreen
 // BnBenjonbornoItemScreen
@@ -49,7 +50,8 @@ class KiduApp extends StatelessWidget {
         "PoemSelectionPage": (context) => PoemSelectionPage(),
         "SinglePoemPage": (context) => SinglePoemPage(),
         "EngAlphabetListScreen": (context) => EngAlphabetListScreen(),
-        "BanglaPoemSelectionPage": (context) => BanglaPoemSelectionPage()
+        "BanglaPoemSelectionPage": (context) => BanglaPoemSelectionPage(),
+        "WordGameScreen": (context) => WordGameScreen()
       },
     );
   }

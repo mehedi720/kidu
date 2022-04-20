@@ -15,7 +15,7 @@ class _FlashScreenState extends State<FlashScreen> {
     super.initState();
     Timer(
         const Duration(
-          seconds: 1,
+          seconds: 3,
         ),
         () => {
               Navigator.pushReplacementNamed(context, 'LanguageSlection'),
@@ -28,7 +28,13 @@ class _FlashScreenState extends State<FlashScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Image.asset("assets/img/flash_screen.png"),
+          Image.asset(
+            "assets/img/kidu.gif",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            scale: 0.12,
+            fit: BoxFit.fill,
+          ),
         ],
       ),
     );

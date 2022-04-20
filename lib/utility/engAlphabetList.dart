@@ -82,3 +82,9 @@ List EngWords = [
   "Yacht",
   "Zoo"
 ];
+
+class EngWordGameHelper {
+  static getWordItem(int index) {
+    return EngWords[index].length;
+  }
+}
