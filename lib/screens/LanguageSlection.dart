@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kidu/components/buttons.dart';
 import 'package:kidu/utility/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageSlection extends StatefulWidget {
   const LanguageSlection({Key? key}) : super(key: key);
@@ -10,6 +11,16 @@ class LanguageSlection extends StatefulWidget {
 }
 
 class _LanguageSlectionState extends State<LanguageSlection> {
+  getEngSorage() async {
+    final storage = await SharedPreferences.getInstance();
+    storage.setString("language", "English");
+  }
+
+  getBnSorage() async {
+    final storage = await SharedPreferences.getInstance();
+    storage.setString("language", "Bangla");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +61,8 @@ class _LanguageSlectionState extends State<LanguageSlection> {
                         Content: "English",
                         OnTap: () {
 //TODO:  have to implement shared preferences
+                          getEngSorage();
+
                           Navigator.pushNamed(context, "PersonalizeScreenEng");
                         },
                       ),
@@ -66,6 +79,7 @@ class _LanguageSlectionState extends State<LanguageSlection> {
                       ButtonSmall(
                           OnTap: () {
                             //TODO:  have to implement shared preferences
+                            getBnSorage();
                             Navigator.pushNamed(context, "PersonalizeScreenBn");
                           },
                           Content: "বাংলা",

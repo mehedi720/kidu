@@ -35,6 +35,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   audioplayers: ^0.20.1
+  provider: ^6.0.2
+  shared_preferences: ^2.0.13
+  image_picker: ^0.8.5
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +72,9 @@ flutter:
     - assets/mp3/
     - assets/mp3/poems/
     - assets/mp3/poems/bn/
+    - assets/mp3/benjon/
+    - assets/mp3/soroborno/
+    - assets/mp3/alphabet/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -93,5 +99,32 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
+  fonts:
+    - family: concertOne
+      fonts:
+      - asset: assets/fonts/conreg.ttf
+
+    - family: inter
+      fonts:
+        - asset: assets/fonts/inter.ttf
+        - asset: assets/fonts/inter.ttf
+          weight: 400
+
+    - family: meghaloy
+      fonts:
+        - asset: assets/fonts/meghaloy.ttf
+
+    - family: sirajee
+      fonts:
+        - asset: assets/fonts/sirajee.ttf
+
+    - family: borshon
+      fonts:
+        - asset: assets/fonts/borshon.ttf
+
+    - family: mahfuz
+      fonts:
+        - asset: assets/fonts/mahfuz.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

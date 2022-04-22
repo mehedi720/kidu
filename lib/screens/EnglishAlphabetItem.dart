@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:kidu/utility/engAlphabetList.dart';
 
@@ -45,12 +46,12 @@ class _EnglishAlphabetItemScreenState extends State<EnglishAlphabetItemScreen> {
                     Text(
                       "${EngAlphabetBig[widget.itemNumber]}",
                       style:
-                          TextStyle(fontSize: 180, fontWeight: FontWeight.w900),
+                          TextStyle(fontSize: 140, fontWeight: FontWeight.w900),
                     ),
                     Text(
                       "${EngAlphabetSm[widget.itemNumber]}",
                       style:
-                          TextStyle(fontSize: 180, fontWeight: FontWeight.w900),
+                          TextStyle(fontSize: 140, fontWeight: FontWeight.w900),
                     ),
                     Container(
                       height: 250,
@@ -64,10 +65,17 @@ class _EnglishAlphabetItemScreenState extends State<EnglishAlphabetItemScreen> {
                               height: 60,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle, color: PURPLE_PR),
-                              child: Icon(
-                                Icons.play_arrow,
-                                color: Colors.white,
-                                size: 40,
+                              child: GestureDetector(
+                                onTap: () {
+                                  AudioCache pl = AudioCache();
+                                  pl.play(
+                                      "mp3/alphabet/${widget.itemNumber}.mp3");
+                                },
+                                child: Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 40,
+                                ),
                               ),
                             ),
                           )

@@ -1,15 +1,66 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kidu/utility/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+String preferLanguage = "English";
+List banglaCon = [
+  "সংখ্যা",
+  "সংখ্যা গণনা শিখি",
+  "বর্ণমালা",
+  "আসো বর্ণ শিখি",
+  "গণিত",
+  "হিসাব করতে শিখি",
+  "ছড়া",
+  "কিছু সুন্দর ছড়া"
+];
+List EngCon = [
+  "Numbers",
+  "Learn to Count",
+  "Alphabet",
+  "Learn all the Letters",
+  "Math",
+  "Learn to Calculate",
+  "Poems",
+  "Learn some Rhymes"
+];
+List mainCon = EngCon;
 
 class DashBoard extends StatefulWidget {
-  const DashBoard({Key? key}) : super(key: key);
+  String? m;
+  DashBoard({Key? key}) : super(key: key);
 
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
 
 class _DashBoardState extends State<DashBoard> {
+  SharedPreferences? storage;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration.zero, () async {
+      storage = await SharedPreferences.getInstance();
+      widget.m = storage?.getString("kidName");
+      setState(() {
+        widget.m;
+      });
+
+      //language
+
+      String? lang = storage?.getString("language");
+      if (preferLanguage != lang) {
+        setState(() {
+          preferLanguage = lang!;
+          mainCon = banglaCon;
+        });
+      }
+      ;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +72,70 @@ class _DashBoardState extends State<DashBoard> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Icon(
-              Icons.menu,
-              size: 32,
+            child: GestureDetector(
+              onTap: () {
+                if (preferLanguage == "English") {
+                  setState(() {
+                    preferLanguage = "Bangla";
+                  });
+                } else {
+                  setState(() {
+                    preferLanguage = "English";
+                  });
+                }
+
+                if (preferLanguage == "Bangla") {
+                  setState(() {
+                    mainCon = banglaCon;
+                  });
+                } else {
+                  setState(() {
+                    mainCon = EngCon;
+                  });
+                }
+              },
+              child: Icon(
+                Icons.translate,
+                size: 28,
+              ),
             ),
+          ),
+
+          //popup menu
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "Settings");
+                  },
+                  child: ListTile(
+                    title: Text("Settings"),
+                  ),
+                ),
+              ),
+              PopupMenuItem(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "Contact");
+                  },
+                  child: ListTile(
+                    title: Text("Contact"),
+                  ),
+                ),
+              ),
+              PopupMenuItem(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "About");
+                  },
+                  child: ListTile(
+                    title: Text("About"),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -53,21 +164,24 @@ class _DashBoardState extends State<DashBoard> {
                     height: 20,
                   ),
                   Text(
-                    "Greetings !!",
+                    "Helloo !!",
                     style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 16,
-                    ),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontFamily: "inter",
+                        fontStyle: FontStyle.normal),
                   ),
                   SizedBox(
                     height: 8,
                   ),
                   Text(
-                    "Kids Name",
+                    widget.m?.toUpperCase() ?? " lol",
                     style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 26,
-                        color: ORANGE_PR),
+                        fontSize: 36,
+                        color: ORANGE_PR,
+                        fontFamily: "concertOne",
+                        letterSpacing: 3.0),
                   )
                 ],
               ),
@@ -92,42 +206,63 @@ class _DashBoardState extends State<DashBoard> {
                   MainGridItem(
                       OnTap: () {
                         //TODO: had to add some thing
-                        Navigator.pushNamed(context, "NumberLearningScreen");
+                        if (preferLanguage == "Bangla") {
+                          Navigator.pushNamed(
+                              context, "BnNumberLearningScreen");
+                        } else {
+                          Navigator.pushNamed(context, "NumberLearningScreen");
+                        }
                       },
                       BackgroundColor: GREEN_2,
                       ContentColor: GREEN_PR,
                       ImageLocation: "assets/img/number.png",
-                      HeadLine: "Numbers",
-                      SubHeadLine: "Learn to Count"),
+                      HeadLine: mainCon[0],
+                      SubHeadLine: mainCon[1]),
                   MainGridItem(
                       OnTap: () {
                         //TODO: had to add some thing
-                        Navigator.pushNamed(context, "EngAlphabetListScreen");
+                        if (preferLanguage == "Bangla") {
+                          Navigator.pushNamed(
+                              context, "BanglaAlphabetSelectionScreen");
+                        } else {
+                          Navigator.pushNamed(context, "EngAlphabetListScreen");
+                        }
                       },
                       BackgroundColor: ORANGE_2,
                       ContentColor: ORANGE_PR,
                       ImageLocation: "assets/img/alphabet.png",
-                      HeadLine: "Alphabet",
-                      SubHeadLine: "Learn all the Letters"),
+                      HeadLine: mainCon[2],
+                      SubHeadLine: mainCon[3]),
                   MainGridItem(
                       OnTap: () {
                         //TODO: had to add some thing
+                        if (preferLanguage == "Bangla") {
+                          Navigator.pushNamed(
+                              context, "MathLearningScreenBangla");
+                        } else {
+                          Navigator.pushNamed(context, "MathLearningScreen");
+                        }
                       },
                       BackgroundColor: YELLOW_2,
                       ContentColor: YELLOW_PR,
                       ImageLocation: "assets/img/block.png",
-                      HeadLine: "Words",
-                      SubHeadLine: "Learn to Spell"),
+                      HeadLine: mainCon[4],
+                      SubHeadLine: mainCon[5]),
                   MainGridItem(
                       OnTap: () {
                         //TODO: had to add some thing
-                        Navigator.pushNamed(context, "PoemSelectionPage");
+                        if (preferLanguage == "Bangla") {
+                          Navigator.pushNamed(
+                              context, "BanglaPoemSelectionPage");
+                        } else {
+                          Navigator.pushNamed(context, "PoemSelectionPage");
+                        }
                       },
                       BackgroundColor: PURPLE_2,
                       ContentColor: PURPLE_PR,
-                      ImageLocation: "assets/img/number.png",
-                      HeadLine: "Poems",
-                      SubHeadLine: "Learn some Rhymes"),
+                      ImageLocation: "assets/img/humpty.png",
+                      HeadLine: mainCon[6],
+                      SubHeadLine: mainCon[7]),
                 ],
               ),
             )

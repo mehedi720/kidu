@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:kidu/utility/banglaBornomal.dart';
 
@@ -21,12 +22,30 @@ class _BnSorobornoItemScreenState extends State<BnSorobornoItemScreen> {
         titleSpacing: 0,
         title: Text("${BanglaAlphabetVowels[widget.itemNumber]}"),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Icon(
-              Icons.more_vert,
-              size: 32,
-            ),
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "Contact");
+                  },
+                  child: ListTile(
+                    title: Text("Contact"),
+                  ),
+                ),
+              ),
+              PopupMenuItem(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "About");
+                  },
+                  child: ListTile(
+                    title: Text("About"),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -62,10 +81,17 @@ class _BnSorobornoItemScreenState extends State<BnSorobornoItemScreen> {
                               height: 60,
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle, color: PURPLE_PR),
-                              child: Icon(
-                                Icons.play_arrow,
-                                color: Colors.white,
-                                size: 40,
+                              child: GestureDetector(
+                                onTap: () {
+                                  AudioCache pl = AudioCache();
+                                  pl.play(
+                                      "mp3/soroborno/${widget.itemNumber}.mp3");
+                                },
+                                child: Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 40,
+                                ),
                               ),
                             ),
                           )

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:kidu/components/buttons.dart';
 import 'package:kidu/components/inputs.dart';
 import 'package:kidu/utility/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PersonalizeScreenEng extends StatefulWidget {
-  const PersonalizeScreenEng({Key? key}) : super(key: key);
+  PersonalizeScreenEng({Key? key}) : super(key: key);
 
   @override
   State<PersonalizeScreenEng> createState() => _PersonalizeScreenEngState();
@@ -12,6 +13,15 @@ class PersonalizeScreenEng extends StatefulWidget {
 
 class _PersonalizeScreenEngState extends State<PersonalizeScreenEng> {
   final _formkey = GlobalKey<FormState>();
+
+  var nameCntrl = TextEditingController();
+  var ageCntrl = TextEditingController();
+  setAgeName(String name, String age) async {
+    final storage = await SharedPreferences.getInstance();
+    storage.setString("kidName", name);
+    storage.setString("kidAge", age);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +52,7 @@ class _PersonalizeScreenEngState extends State<PersonalizeScreenEng> {
                 child: Column(
                   children: [
                     TextInput(
+                        contrl: nameCntrl,
                         LabelText: "Kids Name",
                         BackgroundColor: ORANGE_2,
                         ContentColor: ORANGE_PR),
@@ -49,6 +60,7 @@ class _PersonalizeScreenEngState extends State<PersonalizeScreenEng> {
                       height: 15.0,
                     ),
                     TextInput(
+                        contrl: ageCntrl,
                         LabelText: "AGE",
                         BackgroundColor: ORANGE_2,
                         ContentColor: ORANGE_PR),
@@ -58,8 +70,13 @@ class _PersonalizeScreenEngState extends State<PersonalizeScreenEng> {
                     ButtonSmall(
                         OnTap: () {
                           //TODO: have to initiate
-                          Navigator.pushNamedAndRemoveUntil(context,
-                              "DashBoard", (route) => route == "SplashScreen");
+                          if (ageCntrl.text != null && nameCntrl.text != null) {
+                            this.setAgeName(nameCntrl.text, ageCntrl.text);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                "DashBoard",
+                                (route) => route == "SplashScreen");
+                          }
                         },
                         Content: "Lets learn",
                         BackgroundColor: GREEN_2,
@@ -76,5 +93,13 @@ class _PersonalizeScreenEngState extends State<PersonalizeScreenEng> {
         ),
       ),
     ));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    ageCntrl.dispose();
+    nameCntrl.dispose();
   }
 }

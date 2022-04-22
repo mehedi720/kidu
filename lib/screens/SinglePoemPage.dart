@@ -45,12 +45,30 @@ class _SinglePoemPageState extends State<SinglePoemPage> {
         foregroundColor: ORANGE_PR,
         titleSpacing: 0,
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Icon(
-              Icons.more_vert,
-              size: 32,
-            ),
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "Contact");
+                  },
+                  child: ListTile(
+                    title: Text("Contact"),
+                  ),
+                ),
+              ),
+              PopupMenuItem(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "About");
+                  },
+                  child: ListTile(
+                    title: Text("About"),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

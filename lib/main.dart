@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:kidu/screens/About.dart';
 import 'package:kidu/screens/BanglaAlphabetSelectionScreen.dart';
 import 'package:kidu/screens/BanglaPoemSelectionPage.dart';
 import 'package:kidu/screens/BnBenjonbornoListScreen.dart';
 import 'package:kidu/screens/BnNumberLearningScreen.dart';
 import 'package:kidu/screens/BnSorobornoListScreen.dart';
+import 'package:kidu/screens/Contact.dart';
 import 'package:kidu/screens/DashBoardScreen.dart';
 import 'package:kidu/screens/Eng_Alphabet_list.dart';
 import 'package:kidu/screens/LanguageSlection.dart';
+import 'package:kidu/screens/MathLeaningScreenBangla.dart';
+import 'package:kidu/screens/MathLearningScreen.dart';
 import 'package:kidu/screens/NumberGameScreen.dart';
 import 'package:kidu/screens/NumberLearningScreen.dart';
 import 'package:kidu/screens/Personalize.dart';
 import 'package:kidu/screens/PersonalizeBn.dart';
 import 'package:kidu/screens/PoemSelectionPage.dart';
+import 'package:kidu/screens/Settings.dart';
 import 'package:kidu/screens/SinglePoemPage.dart';
 import 'package:kidu/screens/flash_screen.dart';
 import 'package:kidu/screens/wordGame.dart';
@@ -51,7 +56,12 @@ class KiduApp extends StatelessWidget {
         "SinglePoemPage": (context) => SinglePoemPage(),
         "EngAlphabetListScreen": (context) => EngAlphabetListScreen(),
         "BanglaPoemSelectionPage": (context) => BanglaPoemSelectionPage(),
-        "WordGameScreen": (context) => WordGameScreen()
+        "WordGameScreen": (context) => WordGameScreen(),
+        "MathLearningScreen": (context) => MathLearningScreen(),
+        "MathLearningScreenBangla": (context) => MathLearningScreenBangla(),
+        "About": (context) => About(),
+        "Contact": (context) => Contact(),
+        "Settings": (context) => Settings()
       },
     );
   }

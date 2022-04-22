@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kidu/components/buttons.dart';
 import 'package:kidu/components/inputs.dart';
 import 'package:kidu/utility/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PersonalizeScreenBn extends StatefulWidget {
   const PersonalizeScreenBn({Key? key}) : super(key: key);
@@ -12,6 +13,14 @@ class PersonalizeScreenBn extends StatefulWidget {
 
 class _PersonalizeScreenBnState extends State<PersonalizeScreenBn> {
   final _formkey = GlobalKey<FormState>();
+  var nameCntrl = TextEditingController();
+  var ageCntrl = TextEditingController();
+  setAgeName(String name, String age) async {
+    final storage = await SharedPreferences.getInstance();
+    storage.setString("kidName", name);
+    storage.setString("kidAge", age);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +51,7 @@ class _PersonalizeScreenBnState extends State<PersonalizeScreenBn> {
                 child: Column(
                   children: [
                     TextInput(
+                        contrl: nameCntrl,
                         LabelText: "শিশুর নাম",
                         BackgroundColor: PURPLE_2,
                         ContentColor: PURPLE_PR),
@@ -49,6 +59,7 @@ class _PersonalizeScreenBnState extends State<PersonalizeScreenBn> {
                       height: 15.0,
                     ),
                     TextInput(
+                        contrl: ageCntrl,
                         LabelText: "বয়স",
                         BackgroundColor: PURPLE_2,
                         ContentColor: PURPLE_PR),
@@ -58,9 +69,13 @@ class _PersonalizeScreenBnState extends State<PersonalizeScreenBn> {
                     ButtonSmall(
                         OnTap: () {
                           //TODO: have to initiate in bangla
-
-                          Navigator.pushNamedAndRemoveUntil(context,
-                              "DashBoard", (route) => route == "SplashScreen");
+                          if (ageCntrl.text != null && nameCntrl.text != null) {
+                            this.setAgeName(nameCntrl.text, ageCntrl.text);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                "DashBoard",
+                                (route) => route == "SplashScreen");
+                          }
                         },
                         Content: "শুরু করুন",
                         BackgroundColor: GREEN_2,
@@ -77,5 +92,13 @@ class _PersonalizeScreenBnState extends State<PersonalizeScreenBn> {
         ),
       ),
     ));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    ageCntrl.dispose();
+    nameCntrl.dispose();
   }
 }

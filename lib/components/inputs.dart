@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class TextInput extends StatefulWidget {
+  var contrl;
   String LabelText;
   Color BackgroundColor, ContentColor;
   TextInput(
       {Key? key,
       required this.LabelText,
       required this.BackgroundColor,
-      required this.ContentColor})
+      required this.ContentColor,
+      this.contrl})
       : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class _TextInputState extends State<TextInput> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: widget.contrl,
       style: TextStyle(
           color: Colors.grey.shade900,
           fontWeight: FontWeight.w800,
