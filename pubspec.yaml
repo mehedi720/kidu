@@ -38,6 +38,7 @@ dependencies:
   provider: ^6.0.2
   shared_preferences: ^2.0.13
   image_picker: ^0.8.5
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
     - assets/mp3/benjon/
     - assets/mp3/soroborno/
     - assets/mp3/alphabet/
+    - assets/mp3/bnonko/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

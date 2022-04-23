@@ -133,7 +133,7 @@ class _NumberGridItemState extends State<NumberGridItem> {
     return InkWell(
       onTap: () {
         play() async {
-          await audio.play("mp3/${widget.index + 1}.mp3");
+          await audio.play("mp3/bnonko/${widget.index + 1}.mp3");
         }
 
         ;

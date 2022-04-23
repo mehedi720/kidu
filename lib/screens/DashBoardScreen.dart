@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -5,6 +7,7 @@ import 'package:kidu/utility/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String preferLanguage = "English";
+String ImagePath = " ";
 List banglaCon = [
   "সংখ্যা",
   "সংখ্যা গণনা শিখি",
@@ -44,8 +47,10 @@ class _DashBoardState extends State<DashBoard> {
     Future.delayed(Duration.zero, () async {
       storage = await SharedPreferences.getInstance();
       widget.m = storage?.getString("kidName");
+      ImagePath = storage?.getString("img") ?? " ";
       setState(() {
         widget.m;
+        ImagePath;
       });
 
       //language
@@ -158,7 +163,10 @@ class _DashBoardState extends State<DashBoard> {
                       shape: BoxShape.circle,
                     ),
                     //TODO:  kids image here
-                    child: Image.asset("assets/img/personalizeScreen.png"),
+                    child: ImagePath == " "
+                        ? Image.asset("assets/img/personalizeScreen.png")
+                        : Image.file(File(ImagePath)),
+                    // Image.asset("assets/img/personalizeScreen.png"),
                   ),
                   SizedBox(
                     height: 20,

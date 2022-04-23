@@ -189,4 +189,11 @@ class _SingleBnPoemPageState extends State<SingleBnPoemPage> {
       ),
     );
   }
+
+  @override
+  void dispose() async {
+    // TODO: implement dispose
+    super.dispose();
+    await adPlayer?.stop();
+  }
 }

@@ -52,7 +52,8 @@ List EngAlphabetSm = [
   "v",
   "w",
   "x",
-  "y" "z"
+  "y",
+  "z"
 ];
 List EngWords = [
   "Apple",

@@ -184,4 +184,12 @@ class _SinglePoemPageState extends State<SinglePoemPage> {
       ),
     );
   }
+
+  @override
+  void dispose() async {
+    // TODO: implement dispose
+    super.dispose();
+
+    await adPlayer?.stop();
+  }
 }
